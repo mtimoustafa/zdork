@@ -16,4 +16,14 @@ module GameInterface
     @@prompt.say(@@pastel.green(title_text))
     @@prompt.say(@@pastel.cyan(help_text))
   end
+
+  def self.enter_scene(description:, directions:)
+    @@prompt.say(description)
+    self.print_newline
+    @@prompt.say(directions)
+  end
+
+  def self.print_newline
+    @@prompt.say("\n")
+  end
 end
