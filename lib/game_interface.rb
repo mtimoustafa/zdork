@@ -6,14 +6,19 @@ module GameInterface
   @@pastel = Pastel.new
 
   def self.print_title_screen
-    title_text = 'ZDORK: THE LEGEND OF HYRULE RINGS OF POWER'
-    help_text = <<~TEXT
-      To make a choice, type one of the words written in ALL CAPS and press the Enter/Return key.
-      Exit at any time by typing 'exit'.
-    TEXT
+    @@prompt.say(@@pastel.green('ZDORK: THE LEGEND OF HYRULE RINGS OF POWER'))
+    self.print_help_text
+  end
 
-    @@prompt.say(@@pastel.green(title_text))
-    self.announce(description: help_text)
+  def self.print_help_text
+    self.announce(
+      description: <<~TEXT
+                     To make a choice, type one of the words written in all-caps and press the Enter/Return key.
+                     Type CHECK to see what's around you.
+                     Type HELP to see these instructions again.
+                     Exit at any time by typing EXIT.
+                   TEXT
+    )
   end
 
   def self.converse(description:)
@@ -35,6 +40,8 @@ module GameInterface
   end
 
   def self.prompt_input
-    @@prompt.ask('> ', required: true)
+    response = @@prompt.ask('> ', required: true)
+    GameInterface.print_newline
+    return response
   end
 end

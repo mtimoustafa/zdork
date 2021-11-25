@@ -5,21 +5,23 @@ class GameController
   attr_reader :current_scene, :current_event
 
   def initialize
-    start_new_game
-  end
-
-  private
-
-  def start_new_game
     GameInterface.print_title_screen
     transition_scene(scene_name: :desert)
   end
+
+  private
 
   # TODO: make this not recurse so the stack doesn't overflow eventually
   def process_player_command(player_command:)
     filtered_command = filter_player_command(player_command: player_command)
 
     exit if filtered_command == 'exit'
+
+    if filtered_command == 'help'
+      GameInterface.print_help_text
+      player_command = GameInterface.prompt_input
+      process_player_command(player_command: player_command)
+    end
 
     if filtered_command == 'check'
       player_command = GameInterface.converse(description: @current_event[:description])
@@ -29,7 +31,6 @@ class GameController
     if @current_scene[:choices].keys.include?(filtered_command)
       @current_event = @current_scene[:choices][filtered_command]
 
-      GameInterface.print_newline
       GameInterface.narrate(description: @current_event[:description])
 
       transition_scene(scene_name: @current_event[:scene_transition]) unless @current_event[:scene_transition].nil?
