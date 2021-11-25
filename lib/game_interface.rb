@@ -8,9 +8,8 @@ module GameInterface
   def self.print_title_screen
     title_text = 'ZDORK: THE LEGEND OF HYRULE RINGS OF POWER'
     help_text = <<~TEXT
-      Choose an option with hjkl or the arrow keys, and select it with the Enter/Return key.
-      If prompted for text, type it in the field and confirm with the Enter/Return key.
-      Exit at any time with ctrl-c, or whatever your terminal uses to kill a process.
+      To make a choice, type one of the words written in ALL CAPS and press the Enter/Return key.
+      Exit at any time by typing 'exit'.
     TEXT
 
     @@prompt.say(@@pastel.green(title_text))
@@ -18,7 +17,7 @@ module GameInterface
   end
 
   def self.converse(description:)
-    @@prompt.say(description)
+    self.narrate(description: description)
     return self.prompt_input
   end
 
@@ -28,6 +27,7 @@ module GameInterface
 
   def self.narrate(description:)
     @@prompt.say(description)
+    self.print_newline
   end
 
   def self.print_newline

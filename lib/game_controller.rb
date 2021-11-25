@@ -19,6 +19,8 @@ class GameController
   def process_player_command(player_command:)
     filtered_command = filter_player_command(player_command: player_command)
 
+    exit if filtered_command == 'exit'
+
     if filtered_command == 'check'
       player_command = GameInterface.converse(description: @current_event[:description])
       process_player_command(player_command: player_command)
@@ -26,6 +28,8 @@ class GameController
 
     if @current_scene[:choices].keys.include?(filtered_command)
       @current_event = @current_scene[:choices][filtered_command]
+
+      GameInterface.print_newline
       GameInterface.narrate(description: @current_event[:description])
 
       transition_scene(scene_name: @current_event[:scene_transition]) unless @current_event[:scene_transition].nil?
