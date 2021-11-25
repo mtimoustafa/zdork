@@ -24,6 +24,26 @@ class GameController
   end
 
   def process_player_command(player_command:)
-    puts player_command
+    filtered_command = filter_player_command(player_command: player_command)
+
+    if filtered_command == 'check'
+      player_command = GameInterface.converse(description: @current_event[:description])
+      process_player_command(player_command: player_command)
+    end
+
+    puts @current_scene[:choices]
+    if @current_scene[:choices].keys.include?(filtered_command)
+      # TODO
+    else
+      GameInterface.narrate(description: "Sorry, you cannot do that.\n")
+      player_command = GameInterface.converse(description: @current_event[:description])
+      process_player_command(player_command: player_command)
+    end
+  end
+
+  private
+
+  def filter_player_command(player_command:)
+    player_command.strip.downcase
   end
 end
