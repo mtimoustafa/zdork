@@ -12,17 +12,10 @@ class GameController
 
   def start_new_game
     GameInterface.print_title_screen
-
-    @current_scene = GameData::SCENES[:desert]
-    @current_event = @current_scene[:idle_event]
-
-    player_command = GameInterface.enter_scene(
-      description: @current_scene[:description],
-      directions:  @current_event[:description]
-    )
-    process_player_command(player_command: player_command)
+    transition_scene(scene_name: :desert)
   end
 
+  # TODO: make this not recurse so the stack doesn't overflow eventually
   def process_player_command(player_command:)
     filtered_command = filter_player_command(player_command: player_command)
 
@@ -31,17 +24,26 @@ class GameController
       process_player_command(player_command: player_command)
     end
 
-    puts @current_scene[:choices]
     if @current_scene[:choices].keys.include?(filtered_command)
-      # TODO
+      @current_event = @current_scene[:choices][filtered_command]
+      GameInterface.narrate(description: @current_event[:description])
+
+      transition_scene(scene_name: @current_event[:scene_transition]) unless @current_event[:scene_transition].nil?
     else
-      GameInterface.narrate(description: "Sorry, you cannot do that.\n")
+      GameInterface.announce(description: "Sorry, you cannot do that.\n")
+
       player_command = GameInterface.converse(description: @current_event[:description])
       process_player_command(player_command: player_command)
     end
   end
 
-  private
+  def transition_scene(scene_name:)
+    @current_scene = GameData::SCENES[scene_name.to_sym]
+    @current_event = @current_scene[:idle_event]
+
+    player_command = GameInterface.converse(description: @current_scene[:intro_description])
+    process_player_command(player_command: player_command)
+  end
 
   def filter_player_command(player_command:)
     player_command.strip.downcase
