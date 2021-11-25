@@ -46,6 +46,7 @@ module GameInterface
   end
 
   def self.die(message:)
+    @@prompt.say('...')
     sleep 5
 
     spoopy_death_message_spam = 1000.times.collect { message.upcase }.join
@@ -54,6 +55,13 @@ module GameInterface
     sleep 1
     @@prompt.say(@@pastel.red('[ Y O U  D I E D ]'))
 
+    exit
+  end
+
+  def self.win
+    @@prompt.say('...')
+    sleep 5
+    @@prompt.say(@@pastel.green('[ V I C T O R Y  A C H I E V E D ]'))
     exit
   end
 end

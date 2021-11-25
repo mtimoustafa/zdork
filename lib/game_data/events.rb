@@ -16,6 +16,14 @@ module GameData
                      To the SOUTH, a strange whisper emanates.
                    TEXT
     },
+    desert_south: {
+      scene_transition: :nothing,
+      description: <<~TEXT
+                     You don't know if you're dehydrated or if someone's actually calling for you. One thing's for sure, investigating
+                     the voice is better than staying on this forsaken dune.
+                     You slide down the sand and look to the horizon. Nothing but the blue sky and the wind breezing.
+                   TEXT
+    },
     desert_west: {
       scene_transition: :shimmer,
       description: <<~TEXT
@@ -24,9 +32,22 @@ module GameData
                      With every step you take towards it, the shimmer grows - larger, but also impossibly in every direction.
                    TEXT
     },
+    nothing_back: {
+      scene_transition: :desert,
+      description: <<~TEXT
+                     The fact that the climb up is much more difficult than sliding down mixes frustration into your terror.
+                   TEXT
+    },
+    nothing_idle: {
+      description: <<~TEXT
+                     The wind tickles your face; the sun beats down on it.
+                     You feel silly, and scared.
+                     Maybe you should climb BACK up the dune.
+                   TEXT
+    },
     shimmer_death: {
       causes_death: true,
-      death_message: 'shimmerglittervibrations',
+      death_message: 'shimmervibrate',
       description: <<~TEXT
                      You try to observe the SHIMMER
                      But there is no SHIMMER to OBSERVE
@@ -52,6 +73,40 @@ module GameData
       description: <<~TEXT
                      An obsidian OBELISK looms ahead of you. A starry night SKY twinkles above.
                    TEXT
-    }
+    },
+    obelisk_sky: {
+      description: <<~TEXT
+                     The night sky is a pitch-black backdrop, so much so that the obelisk would fade into it if the stars
+                     weren't shining so brightly. Their gleam is intense and in it, you can feel the yearning of the sun.
+                   TEXT
+    },
+    obelisk_death: {
+      causes_death: true,
+      death_message: 'thesun',
+      description: <<~TEXT
+                     ALL HOPE IS LOST THE LIGHT IT BLINDS
+                   TEXT
+    },
+    obelisk_fight_start: {
+      scene_transition: :obelisk_fight,
+      description: <<~TEXT
+                     The obelisk pulls at your attention with the force of a thousand suns. It declares itself your ARCH ENEMY.
+                     Soon you feel your consciousness melt at the seams. The obelisk wants to fill you with so much light
+                     you would burst at the seams. You are in danger.
+                   TEXT
+    },
+    obelisk_fight_mantra: {
+      description: <<~TEXT
+                     HESUNTHESUNTHESUNTHESUNTHESUNTHESUNTHESUNTHESUNTHESUNTHESUNTHESUNTHESUNTHESUNTHESUNTHESUNTHESU
+                   TEXT
+    },
+    obelisk_victory: {
+      causes_victory: true,
+      description: <<~TEXT
+                     You stop resisting the obelisk as your arch enemy. You become as dark as the night sky itself.
+                     The obelisk's fury ceases to flow into you. It passes through you like a running river.
+                     You feel yourself become weightless. No more shimmering. No more whispering. No more sun.
+                   TEXT
+    },
   }
 end
