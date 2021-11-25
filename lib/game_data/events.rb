@@ -24,6 +24,17 @@ module GameData
                      With every step you take towards it, the shimmer grows - larger, but also impossibly in every direction.
                    TEXT
     },
+    shimmer_death: {
+      causes_death: true,
+      death_message: 'shimmerglittervibrations',
+      description: <<~TEXT
+                     You try to observe the SHIMMER
+                     But there is no SHIMMER to OBSERVE
+                     There is only EVERYTHING
+                     And EVERYTHING OBSERVES the SHIMMER
+                     YOU are the SHIMMER and the SHIMMER is YOU
+                   TEXT
+    },
     shimmer_idle: {
       description: <<~TEXT
                      Your vision itself is shimmering.

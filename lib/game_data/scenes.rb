@@ -28,7 +28,7 @@ module GameData
                          TEXT
       idle_event: EVENTS[:shimmer_idle],
       choices: {
-        'shimmer' => '',
+        'shimmer' => EVENTS[:shimmer_death],
         'back' => EVENTS[:shimmer_back]
       }
     },

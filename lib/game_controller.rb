@@ -33,6 +33,10 @@ class GameController
 
       GameInterface.narrate(description: @current_event[:description])
 
+      if @current_event[:causes_death]
+        GameInterface.die(message: @current_event[:death_message])
+      end
+
       if @current_event[:scene_transition].nil?
         player_command = GameInterface.prompt_input
         process_player_command(player_command: player_command)
