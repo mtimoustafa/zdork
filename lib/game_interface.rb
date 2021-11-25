@@ -21,9 +21,15 @@ module GameInterface
     @@prompt.say(description)
     self.print_newline
     @@prompt.say(directions)
+
+    return self.prompt_input
   end
 
   def self.print_newline
     @@prompt.say("\n")
+  end
+
+  def self.prompt_input
+    @@prompt.ask('> ', required: true)
   end
 end

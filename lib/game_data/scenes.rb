@@ -1,3 +1,5 @@
+require_relative 'events'
+
 module GameData
   SCENES = {
     desert: {
@@ -5,11 +7,30 @@ module GameData
                      Standing atop a hill, you take in the expanse of a desolate desert stretching in all directions.
                      The dry air's heat is dwarfed by that of the beating sun's.
                    TEXT
-      directions: <<~TEXT
-                     A strange shimmer can be seen to the WEST. A mirage?
-                     A tall black obelisk pierces the horizon to the EAST.
-                     To the SOUTH, a strange whisper emanates.
+      idle_event: EVENTS[:desert_idle],
+      choices: {
+        'east' => EVENTS[:desert_east],
+        'south' => {
+          # TODO
+        },
+        'west' => {
+          # TODO
+        }
+      }
+    },
+    obelisk: {
+      description: <<~TEXT,
+                    An obsidian OBELISK looms ahead of you. A starry night SKY twinkles above.
                    TEXT
+      idle_event: EVENTS[:obelisk_exterior],
+      choices: {
+        'sky': {
+          # TODO
+        },
+        'obelisk': {
+          # TODO
+        }
+      }
     }
   }
 end
