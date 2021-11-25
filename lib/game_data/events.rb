@@ -16,6 +16,27 @@ module GameData
                      To the SOUTH, a strange whisper emanates.
                    TEXT
     },
+    desert_west: {
+      scene_transition: :shimmer,
+      description: <<~TEXT
+                     Only a fool would willingly chase a mirage. You can't explain why you're acting like a fool.
+                     At first the shimmer held promise. What kind of promise, you can't say.
+                     With every step you take towards it, the shimmer grows - larger, but also impossibly in every direction.
+                   TEXT
+    },
+    shimmer_idle: {
+      description: <<~TEXT
+                     Your vision itself is shimmering.
+                     The vibrations grow in your body.
+                     Your very thoughts SHIMMER.
+                     You need to go BACK.
+                   TEXT
+    },
+    shimmer_back: {
+      description: <<~TEXT
+                     There is no back or front. There is no desert, no you. There are only the vibrations.
+                   TEXT
+    },
     obelisk_idle: {
       description: <<~TEXT
                      An obsidian OBELISK looms ahead of you. A starry night SKY twinkles above.

@@ -24,7 +24,7 @@ class GameController
     end
 
     if filtered_command == 'check'
-      player_command = GameInterface.converse(description: @current_event[:description])
+      player_command = GameInterface.converse(description: @current_scene[:idle_event][:description])
       process_player_command(player_command: player_command)
     end
 
@@ -33,7 +33,12 @@ class GameController
 
       GameInterface.narrate(description: @current_event[:description])
 
-      transition_scene(scene_name: @current_event[:scene_transition]) unless @current_event[:scene_transition].nil?
+      if @current_event[:scene_transition].nil?
+        player_command = GameInterface.prompt_input
+        process_player_command(player_command: player_command)
+      else
+        transition_scene(scene_name: @current_event[:scene_transition])
+      end
     else
       GameInterface.announce(description: "Sorry, you cannot do that.\n")
 

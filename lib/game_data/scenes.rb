@@ -17,9 +17,19 @@ module GameData
         'south' => {
           # TODO
         },
-        'west' => {
-          # TODO
-        }
+        'west' => EVENTS[:desert_west],
+      }
+    },
+    shimmer: {
+      intro_description: <<~TEXT,
+                           Soon your vision itself is shimmering. The vibrations grow in your body.
+                           Your very thoughts SHIMMER.
+                           You need to go BACK.
+                         TEXT
+      idle_event: EVENTS[:shimmer_idle],
+      choices: {
+        'shimmer' => '',
+        'back' => EVENTS[:shimmer_back]
       }
     },
     obelisk: {
