@@ -47,7 +47,7 @@ module GameData
     },
     shimmer_death: {
       causes_death: true,
-      death_message: 'shimmervibrate',
+      death_message: 'theshimmer',
       description: <<~TEXT
                      You try to observe the SHIMMER
                      But there is no SHIMMER to OBSERVE

@@ -7,7 +7,6 @@ module GameInterface
 
   def self.print_title_screen
     @@prompt.say(@@pastel.green('ZDORK: THE LEGEND OF HYRULE RINGS OF POWER'))
-    self.print_help_text
   end
 
   def self.print_help_text
@@ -21,13 +20,9 @@ module GameInterface
     )
   end
 
-  def self.converse(description:)
-    self.narrate(description: description)
-    return self.prompt_input
-  end
-
   def self.announce(description:)
     @@prompt.say(@@pastel.cyan(description))
+    self.print_newline
   end
 
   def self.narrate(description:)
@@ -41,14 +36,16 @@ module GameInterface
 
   def self.prompt_input
     response = @@prompt.ask('> ', required: true)
+
     GameInterface.print_newline
-    return response
+    return response.strip.downcase
   end
 
   def self.die(message:)
     @@prompt.say('...')
     sleep 5
 
+    # I'm sorry
     spoopy_death_message_spam = 1000.times.collect { message.upcase }.join
     @@prompt.say(@@pastel.magenta(spoopy_death_message_spam))
 
