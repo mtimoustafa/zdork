@@ -20,6 +20,10 @@ module GameInterface
     )
   end
 
+  def self.print_bad_command
+    self.announce(description: "Sorry, you cannot do that.\n")
+  end
+
   def self.announce(description:)
     @@prompt.say(@@pastel.cyan(description))
     self.print_newline

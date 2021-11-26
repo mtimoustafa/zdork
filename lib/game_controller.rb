@@ -10,7 +10,7 @@ class GameController
   end
 
   def start_game
-    transition_scene(scene_name: :desert)
+    transition_scene(scene_name: GameController.starting_scene_name)
   end
 
   def process_player_command(player_command:)
@@ -23,7 +23,7 @@ class GameController
 
     # Handle incorrect commands
     unless @current_scene[:choices].keys.include?(player_command)
-      GameInterface.announce(description: "Sorry, you cannot do that.\n")
+      GameInterface.print_bad_command
       return converse(description: @current_event[:description])
     end
 
@@ -42,10 +42,14 @@ class GameController
     transition_scene(scene_name: @current_event[:scene_transition])
   end
 
+  def self.starting_scene_name
+    :desert
+  end
+
   private
 
   def transition_scene(scene_name:)
-    @current_scene = GameData::SCENES[scene_name.to_sym]
+    @current_scene = GameData.scenes[scene_name.to_sym]
     @current_event = @current_scene[:idle_event]
 
     return converse(description: @current_scene[:intro_description])
