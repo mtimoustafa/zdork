@@ -13,9 +13,9 @@ class GameController
     transition_scene(scene_name: GameController.starting_scene_name)
   end
 
-  def process_player_command(player_command:)
+  def process_player_command(player_command)
     # Handle common commands
-    return converse(description: @current_scene[:idle_event][:description]) if player_command == 'check'
+    return converse(message: @current_scene[:idle_event][:description]) if player_command == 'check'
     if player_command == 'help'
       GameInterface.print_help_text
       return GameInterface.prompt_input
@@ -24,12 +24,12 @@ class GameController
     # Handle incorrect commands
     unless @current_scene[:choices].keys.include?(player_command)
       GameInterface.print_bad_command
-      return converse(description: @current_event[:description])
+      return converse(message: @current_event[:description])
     end
 
     # Transition event and narrate it
     @current_event = @current_scene[:choices][player_command]
-    GameInterface.narrate(description: @current_event[:description])
+    GameInterface.narrate(@current_event[:description])
 
     # End game under the right conditions
     GameInterface.die(message: @current_event[:death_message]) if @current_event[:causes_death]
@@ -52,11 +52,11 @@ class GameController
     @current_scene = GameData.scenes[scene_name.to_sym]
     @current_event = @current_scene[:idle_event]
 
-    return converse(description: @current_scene[:intro_description])
+    return converse(message: @current_scene[:intro_description])
   end
 
-  def converse(description:)
-    GameInterface.narrate(description: description)
+  def converse(message:)
+    GameInterface.narrate(message)
     player_command = GameInterface.prompt_input
   end
 end

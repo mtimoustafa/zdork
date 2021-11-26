@@ -7,20 +7,20 @@ module GameInterface
   end
 
   def self.print_help_text
-    self.announce(description: self.help_text)
+    self.announce(self.help_text)
   end
 
   def self.print_bad_command
-    self.announce(description: self.error_text)
+    self.announce(self.error_text)
   end
 
-  def self.announce(description:)
-    prompt.say(pastel.cyan(description))
+  def self.announce(message)
+    prompt.say(pastel.cyan(message))
     self.print_newline
   end
 
-  def self.narrate(description:)
-    prompt.say(description)
+  def self.narrate(message)
+    prompt.say(message)
     self.print_newline
   end
 

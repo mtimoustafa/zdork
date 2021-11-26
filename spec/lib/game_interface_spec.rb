@@ -30,7 +30,7 @@ describe GameInterface do
       text = 'asdf'
       expect_any_instance_of(TTY::Prompt).to receive(:say).exactly(1).times.with(/#{text}/)
       expect_any_instance_of(TTY::Prompt).to receive(:say).exactly(1).times.with("\n")
-      GameInterface.announce(description: text)
+      GameInterface.announce(text)
     end
   end
 
@@ -39,7 +39,7 @@ describe GameInterface do
       text = 'asdf'
       expect_any_instance_of(TTY::Prompt).to receive(:say).exactly(1).times.with(/#{text}/)
       expect_any_instance_of(TTY::Prompt).to receive(:say).exactly(1).times.with("\n")
-      GameInterface.narrate(description: text)
+      GameInterface.narrate(text)
     end
   end
 

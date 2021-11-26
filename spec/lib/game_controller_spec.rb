@@ -115,14 +115,14 @@ describe GameController do
     end
 
     it 'transitions events with a narration on a valid command' do
-      game_controller.process_player_command(player_command: 'no grue')
+      game_controller.process_player_command('no grue')
 
       expect(game_controller.current_scene).to be(scenes[:"#{GameController.starting_scene_name}"])
       expect(game_controller.current_event).to be(events[:no_grue])
     end
 
     it 'transitions scene if event calls for it' do
-      game_controller.process_player_command(player_command: 'grue')
+      game_controller.process_player_command('grue')
 
       expect(game_controller.current_scene).to be(scenes[:grue])
       expect(game_controller.current_event).to be(events[:grue_idle])
@@ -131,30 +131,30 @@ describe GameController do
     it 'triggers game loss if event causes it' do
       expect(GameInterface).to receive(:die).exactly(1).times.with(message: events[:grue_fight][:death_message])
 
-      game_controller.process_player_command(player_command: 'grue')
-      game_controller.process_player_command(player_command: 'fight')
+      game_controller.process_player_command('grue')
+      game_controller.process_player_command('fight')
     end
 
     it 'triggers game victory if event causes it' do
       expect(GameInterface).to receive(:win).exactly(1).times
 
-      game_controller.process_player_command(player_command: 'grue')
-      game_controller.process_player_command(player_command: 'run')
+      game_controller.process_player_command('grue')
+      game_controller.process_player_command('run')
     end
 
     it 'narrates scene\'s idle event description on "check" command' do
-      expect(GameInterface).to receive(:narrate).exactly(1).times.with(description: events[:"#{GameController.starting_scene_name}_idle"][:description])
-      game_controller.process_player_command(player_command: 'check')
+      expect(GameInterface).to receive(:narrate).exactly(1).times.with(events[:"#{GameController.starting_scene_name}_idle"][:description])
+      game_controller.process_player_command('check')
     end
 
     it 'announces help text on "help" command' do
       expect(GameInterface).to receive(:print_help_text).exactly(1).times
-      game_controller.process_player_command(player_command: 'help')
+      game_controller.process_player_command('help')
     end
 
     it 'prints an error on a bad command' do
       expect(GameInterface).to receive(:print_bad_command).exactly(1).times
-      game_controller.process_player_command(player_command: 'oopsie')
+      game_controller.process_player_command('oopsie')
     end
   end
 
