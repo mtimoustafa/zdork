@@ -40,9 +40,17 @@ zdork/
 
 ## Design Decisions
 I decided to split the game up into two modules: a controller and interface. This is to separate the concerns of state and I/O respectively.
+
 I collected all the game's scenes and events into their own namespaced objects for cleanliness. As they're pure Ruby hash objects, they're pretty performant. As they're read-only, every call to them is a O(1) constant lookup time.
 
-Some ideas I was left with:
+The game data defines a state machine, with scenes as the nodes and events as transitions.
+
+Scenes are composed of an introductory description, an idle event for the `check` command, and choices that fire a new event.
+
+Events are composed of a text description (to be printed when a choice is made), and a transition to a different scene if desired. Therefore, some events change the scene, while others keep us in the same scene. Additionally, some events can trigger a death state or a win state. Both of these states exit the process with a message, but the death state spams a certain message before doing so :sweat_smile:
+
+
+## Future Improvements
 * Although letting the interface handle exiting the game is convenient, state is the controller's concern. It should be there instead and bubble the game-end event up to `game.rb` which would then quit the process.
 * Putting the test event data in `game_controller_spec.rb` in a factory might be worth it, if it gets too big or would need to be re-used.
 * `GameController#process_player_commmand` should be split up into different methods if it gets bigger than this, as it's already doing a lot right now.
