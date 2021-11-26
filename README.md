@@ -15,6 +15,7 @@ You can use a version manager like `rvm`, `rbenv`, or `asdf` for convenience.
 
 ## Running
 Use `ruby game.rb` to launch the game.
+Use `rspec` to run the test suite.
 
 ## Dependencies
 Only 3 gems are used:
@@ -32,7 +33,7 @@ zdork/
  |   |
  |   |- game_controller.rb    # Controls game state and starting the game
  |   |- game_interface.rb     # Controls game I/O and quitting on game end
- |   |- game_data/            # Data storage for game scenes and events
+ |   |- game_data/            # Data storage for game assets (scenes and events)
  |
  |- spec/                     # Test files for controller and interface
 ```
@@ -45,6 +46,7 @@ Some ideas I was left with:
 * Although letting the interface handle exiting the game is convenient, state is the controller's concern. It should be there instead and bubble the game-end event up to `game.rb` which would then quit the process.
 * Putting the test event data in `game_controller_spec.rb` in a factory might be worth it, if it gets too big or would need to be re-used.
 * `GameController#process_player_commmand` should be split up into different methods if it gets bigger than this, as it's already doing a lot right now.
+* The game text in `GameInterface` could be pulled out into a file and put into `game_data/`.
 
 ## Caveats
 Some "thematic elements" may make it look like the game is broken, but it's by design. Specifically:
