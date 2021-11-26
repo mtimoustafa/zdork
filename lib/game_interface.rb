@@ -59,7 +59,17 @@ module GameInterface
   private
 
   def self.title_text
-    'ZDORK: THE LEGEND OF HYRULE RINGS OF POWER'
+    <<~TEXT
+    ===================================
+      ___________   ____  _____  _  __
+     |___  /  __ \\ / __ \\|  __ \\| |/ /
+        / /| |  | | |  | | |__) | ' /
+       / / | |  | | |  | |  _  /|  <
+      / /__| |__| | |__| | | \\ \\| . \\
+     /_____|_____/ \\____/|_|  \\_\\_|\\_\\
+
+    ======= A SPOOPY ZORK CLONE =======
+    TEXT
   end
 
   def self.help_text

@@ -4,7 +4,7 @@ require 'tty-prompt'
 describe GameInterface do
   context '.print_title_screen' do
     it 'prints the title screen' do
-      expect_any_instance_of(TTY::Prompt).to receive(:say).exactly(1).times.with(/#{GameInterface.title_text}/)
+      expect_any_instance_of(TTY::Prompt).to receive(:say).exactly(1).times.with(/#{Regexp.escape(GameInterface.title_text)}/)
       GameInterface.print_title_screen
     end
   end
