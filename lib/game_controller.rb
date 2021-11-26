@@ -42,11 +42,11 @@ class GameController
     transition_scene(scene_name: @current_event[:scene_transition])
   end
 
+  private
+
   def self.starting_scene_name
     :desert
   end
-
-  private
 
   def transition_scene(scene_name:)
     @current_scene = GameData.scenes[scene_name.to_sym]
