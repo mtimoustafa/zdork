@@ -2,8 +2,6 @@
 
 A silly little CLI proof-of-concept game written in Ruby, with a spoopy theme and a little twist at the end.
 
-_Thanks for the fun technical test, it was a blast making this_ :smile:
-
 ## Requirements
 Ruby >= 3.0 and that's it!
 
